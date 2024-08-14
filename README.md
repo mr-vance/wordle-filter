@@ -15,7 +15,7 @@ The **WORDLE FILTER** app is a cross-platform tool designed to assist Wordle pla
 
 The program is designed with efficiency in mind, following a logical filtering process. The overall time complexity is:
 
-`[O(N \times (k + m + l))]`
+`[O(N * (k + m + l))]`
 
 Where:
 - \(N\) is the number of words in the dictionary.
