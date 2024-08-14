@@ -30,19 +30,35 @@ def wordle_filter(dictionary, nel, elip, elcp):
     
     # Condition 3: Ensure ELCP letters are in the correct positions
     for letter, pos in elcp:
-        elcp_pattern = f"^.{pos}{letter}"
+        elcp_pattern = f"^{'.' * pos}{letter}"
         filtered_words = [word for word in filtered_words if re.search(elcp_pattern, word)]
     
     return filtered_words
 
-# Example usage
-dictionary = ["apple", "arose", "aloft", "brave", "crane"]
+def load_dictionary(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            words = [line.strip().lower() for line in file]
+        return words
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return []
+    except Exception as e:
+        print(f"An error occurred while loading the dictionary: {e}")
+        return []
 
-# Prompt user for input
-nel, elip, elcp = prompt_user_input()
+# Main program
+if __name__ == "__main__":
+    # Path to the five-letter words dictionary
+    dictionary_file = 'fiveLetterWords.txt'
+    dictionary = load_dictionary(dictionary_file)
 
-# Filter words based on user input
-filtered_words = wordle_filter(dictionary, nel, elip, elcp)
+    if dictionary:
+        # Prompt user for input
+        nel, elip, elcp = prompt_user_input()
 
-# Display the filtered words
-print("Filtered words:", filtered_words)
+        # Filter words based on user input
+        filtered_words = wordle_filter(dictionary, nel, elip, elcp)
+
+        # Display the filtered words
+        print("Filtered words:", filtered_words)
