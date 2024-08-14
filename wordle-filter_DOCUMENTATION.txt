@@ -1,0 +1,39 @@
+Background: Wordle is a single player word guessing game played daily on the internet. Each day, a secret five-letter English word is set at random and players are given 6 attempts to guess this word. In each attempt, the player is given hints on how close they got to the secret word in three ways: 1) if each component letter is not in the secret word; 2) if each component letter is in the secret word but not in the correct position of the secret word; and 3) if each component letter is in the secret word and in the right position of the secret word.
+
+The game ends when the player has exhausted all the 6 attempts or as soon as they guess the secret word. Each daily match is assigned a specific number, which corresponds to the number of matches played since inception of the wordle game. For example, as of August 14, 2024, the match number is 1,125. When the game is over the following information is therefore displayed:
+
+"Wordle 1,125 X/6"
+
+Where X in [X/6] represents the number of attempts the player played until they guessed the word. If the player guessed the word, the number of attempts is specified (e.g. 4/6), otherwise it is left as X/6.
+
+-----------PROGRAM------------
+
+Name: WORDLE FILTER
+
+Description: Cross-platform app that helps wordle players narrow down their choice of five-letter English words from the second to the 6th wordle attempt. An on-board dictionary file with all English words will be used, since this is designed to word offline.
+
+Parameters:
+The app assumes that the player has at least played their first attempt.
+
+1. Existing letters in correct positions [as list = ELCP]  -- this input can be empty
+2. Existing letters in incorrect positions [as list = ELIP] -- this input can be empty
+3. Non existing letters [as list = NEL] --this input can be empty
+
+Operation:
+Use the above information to perform a filter search through the dictionary.
+An example would be:
+```
+Search through the dictionary and find individual words where:
+Condition 0: word must be a five-letter word
+Condition 1: letter in word is not in NEL list
+Condition 2: letter in word is in ELIP list
+Condition 3: letter in word is in ELCP list
+Result: Condition 0 && Condition 1 && Condition 2 && Condition 3
+```
+
+Return:
+Return a list of words matching the search criteria in the parameters.
+All dictionary words are returned if no parameters are provided.
+
+Complexity Analysis:
+We know that the search time is reduced if we modify our dictionary file to only contain five-letter English words. This way, we will only be left with 3 conditions to check for each word.
